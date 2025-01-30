@@ -29,8 +29,19 @@ func handleCreateDatabase(database string) {
 	}
 }
 
+// Lida com a restauração de um banco de dados
+func handleRestoreDatabase(database string, snapshotFilePath string) {
+	command := handleRestoreCommand(snapshotFilePath, database)
+
+	err := command.Run()
+	if err != nil {
+		log.Fatalf("Não foi possível restaurar o banco de dados %s - %s", database, err)
+	}
+}
+
 // Realiza o rollback de uma migração
 func RollbackDatabase(database string, snapshotFilePath string) {
 	handleDeleteDatabase(database)
 	handleCreateDatabase(database)
+	handleRestoreDatabase(database, snapshotFilePath)
 }

@@ -11,10 +11,10 @@ import (
 func main() {
 	// cmd.Execute()
 
-    databases := services.GetDatabases()
+	databases := services.GetDatabases()
 
 	fmt.Println(databases)
 
-    // services.DumpDatabase("opensev_recorrencia", ".")
-	// services.RollbackDatabase("opensev_recorrencia", ".")
+	// services.DumpDatabase("opensev_recorrencia", ".")
+	services.RollbackDatabase("opensev_recorrencia", "./snapshot_opensev_recorrencia_2025-01-30-1738278990153.sql")
 }
