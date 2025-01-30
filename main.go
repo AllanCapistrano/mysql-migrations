@@ -11,5 +11,7 @@ import (
 func main() {
 	// cmd.Execute()
 
-	fmt.Println(services.GetDatabases())
+    databases := services.GetDatabases()
+
+	fmt.Println(databases)
 }
