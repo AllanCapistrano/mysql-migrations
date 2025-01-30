@@ -14,4 +14,6 @@ func main() {
     databases := services.GetDatabases()
 
 	fmt.Println(databases)
+
+    // services.DumpDatabase("opensev_recorrencia", ".")
 }
