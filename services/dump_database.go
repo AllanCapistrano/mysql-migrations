@@ -22,7 +22,7 @@ func handleFileName(fileName string, path string) string {
 }
 
 // Lida com a criação do comando responsável por realizar o dump do banco de dados.
-func handleCreateCommand(database string) *exec.Cmd {
+func handleCreateDumpCommand(database string) *exec.Cmd {
 	// TODO: Fazer com que algumas partes sejam configuradas, mas também ter um valor default
 	return exec.Command(
 		"docker", "exec", "conexa_mysql", "mysqldump",
@@ -45,7 +45,7 @@ func handleCreateOutputFile(fileName string, path string) (*os.File, error) {
 
 // Realiza o dump de um banco de dados.
 func DumpDatabase(database string, outputPath string) {
-	command := handleCreateCommand(database)
+	command := handleCreateDumpCommand(database)
 
 	outputFile, err := handleCreateOutputFile(database, outputPath)
 	if err != nil {
