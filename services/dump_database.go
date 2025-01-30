@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"os/exec"
 	"time"
 )
 
@@ -19,15 +18,6 @@ func handleFileName(fileName string, path string) string {
 	currentDateWithHash := fmt.Sprintf("%d-%02d-%02d-%d", year, month, day, milliseconds)
 
 	return fmt.Sprintf("%s/snapshot_%s_%s.sql", path, fileName, currentDateWithHash)
-}
-
-// Lida com a criação do comando responsável por realizar o dump do banco de dados.
-func handleCreateDumpCommand(database string) *exec.Cmd {
-	// TODO: Fazer com que algumas partes sejam configuradas, mas também ter um valor default
-	return exec.Command(
-		"docker", "exec", "conexa_mysql", "mysqldump",
-		"-u", "root", "--password=root", database,
-	)
 }
 
 // Lida com a criação do arquivo que armazenará o backup do banco de dados.
@@ -45,7 +35,7 @@ func handleCreateOutputFile(fileName string, path string) (*os.File, error) {
 
 // Realiza o dump de um banco de dados.
 func DumpDatabase(database string, outputPath string) {
-	command := handleCreateDumpCommand(database)
+	command := handleDumpCommand(database)
 
 	outputFile, err := handleCreateOutputFile(database, outputPath)
 	if err != nil {

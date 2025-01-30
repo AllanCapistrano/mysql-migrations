@@ -2,7 +2,6 @@ package services
 
 import (
 	"log"
-	"os/exec"
 	"strings"
 )
 
@@ -10,11 +9,7 @@ const DATABASE_PREFIX = "opensev"
 
 // Obtém todos os bancos de dados presentes no container do MySQL.
 func getAllDatabases() string {
-	// TODO: Fazer com que algumas partes sejam configuradas, mas também ter um valor default
-	command := exec.Command(
-		"docker", "exec", "conexa_mysql", "mysql", "-u", "root", 
-		"--password=root", "-N", "-s", "-e", "SHOW DATABASES;",
-	)
+	command := handleDdlCommand("SHOW DATABASES;")
 
 	output, err := command.Output()
 	if err != nil {

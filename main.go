@@ -16,4 +16,5 @@ func main() {
 	fmt.Println(databases)
 
     // services.DumpDatabase("opensev_recorrencia", ".")
+	// services.RollbackDatabase("opensev_recorrencia", ".")
 }
