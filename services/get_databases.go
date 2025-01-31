@@ -3,13 +3,15 @@ package services
 import (
 	"log"
 	"strings"
+
+	"github.com/AllanCapistrano/cnx-migrations/services/database"
 )
 
 const DATABASE_PREFIX = "opensev"
 
 // Obtém todos os bancos de dados presentes no container do MySQL.
 func getAllDatabases() string {
-	command := ddlCommand("SHOW DATABASES;")
+	command := database.DdlCommand("SHOW DATABASES;")
 
 	output, err := command.Output()
 	if err != nil {

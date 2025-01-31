@@ -3,55 +3,57 @@ package services
 import (
 	"fmt"
 	"log"
+
+	"github.com/AllanCapistrano/cnx-migrations/services/database"
 )
 
 // Lida com a remoção de um banco de dados
-func handleDeleteDatabase(database string) {
-	log.Printf("Removendo o banco de dados '%s'", database)
+func handleDeleteDatabase(databaseName string) {
+	log.Printf("Removendo o banco de dados '%s'", databaseName)
 
-	query := fmt.Sprintf("DROP DATABASE %s;", database)
+	query := fmt.Sprintf("DROP DATABASE %s;", databaseName)
 
-	command := ddlCommand(query)
+	command := database.DdlCommand(query)
 
 	err := command.Run()
 	if err != nil {
-		log.Fatalf("Não foi possível remover o banco de dados %s - %s", database, err)
+		log.Fatalf("Não foi possível remover o banco de dados %s - %s", databaseName, err)
 	}
 }
 
 // Lida com a criação de um banco de dados vazio
-func handleCreateDatabase(database string) {
-	log.Printf("Criando o banco de dados '%s'", database)
+func handleCreateDatabase(databaseName string) {
+	log.Printf("Criando o banco de dados '%s'", databaseName)
 
-	query := fmt.Sprintf("CREATE DATABASE %s;", database)
+	query := fmt.Sprintf("CREATE DATABASE %s;", databaseName)
 
-	command := ddlCommand(query)
+	command := database.DdlCommand(query)
 
 	err := command.Run()
 	if err != nil {
-		log.Fatalf("Não foi possível criar o banco de dados %s - %s", database, err)
+		log.Fatalf("Não foi possível criar o banco de dados %s - %s", databaseName, err)
 	}
 }
 
 // Lida com a restauração de um banco de dados
-func handleRestoreDatabase(database string, snapshotFilePath string) {
-	log.Printf("Restaurando o banco de dados '%s'", database)
+func handleRestoreDatabase(databaseName string, snapshotFilePath string) {
+	log.Printf("Restaurando o banco de dados '%s'", databaseName)
 
-	command := restoreCommand(snapshotFilePath, database)
+	command := database.RestoreCommand(snapshotFilePath, databaseName)
 
 	err := command.Run()
 	if err != nil {
-		log.Fatalf("Não foi possível restaurar o banco de dados %s - %s", database, err)
+		log.Fatalf("Não foi possível restaurar o banco de dados %s - %s", databaseName, err)
 	}
 }
 
 // Realiza o rollback de uma migração
-func RollbackDatabase(database string, snapshotFilePath string) {
-	log.Printf("Iniciando processo de rollback do banco de dados '%s' utilizando a snapshot '%s'", database, snapshotFilePath)
+func RollbackDatabase(databaseName string, snapshotFilePath string) {
+	log.Printf("Iniciando processo de rollback do banco de dados '%s' utilizando a snapshot '%s'", databaseName, snapshotFilePath)
 
-	handleDeleteDatabase(database)
-	handleCreateDatabase(database)
-	handleRestoreDatabase(database, snapshotFilePath)
+	handleDeleteDatabase(databaseName)
+	handleCreateDatabase(databaseName)
+	handleRestoreDatabase(databaseName, snapshotFilePath)
 
 	log.Println("Processo de rollback finalizado!")
 }
