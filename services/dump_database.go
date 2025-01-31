@@ -35,7 +35,7 @@ func handleCreateOutputFile(fileName string, path string) (*os.File, error) {
 
 // Realiza o dump de um banco de dados.
 func DumpDatabase(database string, outputPath string) {
-	command := handleDumpCommand(database)
+	command := dumpCommand(database)
 
 	outputFile, err := handleCreateOutputFile(database, outputPath)
 	if err != nil {

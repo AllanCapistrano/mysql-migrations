@@ -9,7 +9,7 @@ const DATABASE_PREFIX = "opensev"
 
 // Obtém todos os bancos de dados presentes no container do MySQL.
 func getAllDatabases() string {
-	command := handleDdlCommand("SHOW DATABASES;")
+	command := ddlCommand("SHOW DATABASES;")
 
 	output, err := command.Output()
 	if err != nil {

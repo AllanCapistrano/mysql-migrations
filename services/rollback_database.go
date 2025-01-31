@@ -11,7 +11,7 @@ func handleDeleteDatabase(database string) {
 
 	query := fmt.Sprintf("DROP DATABASE %s;", database)
 
-	command := handleDdlCommand(query)
+	command := ddlCommand(query)
 
 	err := command.Run()
 	if err != nil {
@@ -25,7 +25,7 @@ func handleCreateDatabase(database string) {
 
 	query := fmt.Sprintf("CREATE DATABASE %s;", database)
 
-	command := handleDdlCommand(query)
+	command := ddlCommand(query)
 
 	err := command.Run()
 	if err != nil {
@@ -37,7 +37,7 @@ func handleCreateDatabase(database string) {
 func handleRestoreDatabase(database string, snapshotFilePath string) {
 	log.Printf("Restaurando o banco de dados '%s'", database)
 
-	command := handleRestoreCommand(snapshotFilePath, database)
+	command := restoreCommand(snapshotFilePath, database)
 
 	err := command.Run()
 	if err != nil {
