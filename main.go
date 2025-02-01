@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/AllanCapistrano/cnx-migrations/services"
+	"github.com/AllanCapistrano/cnx-migrations/services/database"
 )
 
 // "github.com/AllanCapistrano/cnx-migrations/cmd"
@@ -11,10 +11,10 @@ import (
 func main() {
 	// cmd.Execute()
 
-	databases := services.GetDatabases()
+	databases := database.GetDatabases()
 
 	fmt.Println(databases)
 
-	// services.DumpDatabase("opensev_recorrencia", ".")
-	services.RollbackDatabase("opensev_recorrencia", "./snapshot_opensev_recorrencia_2025-01-30-1738278990153.sql")
+	// database.DumpDatabase("opensev_recorrencia", ".")
+	database.RollbackDatabase("opensev_recorrencia", "./snapshot_opensev_recorrencia_2025-02-01-1738448077080.sql")
 }
