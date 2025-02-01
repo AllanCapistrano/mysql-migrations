@@ -48,6 +48,6 @@ func DumpDatabase(databaseName string, outputPath string) {
 
 	err = command.Run()
 	if err != nil {
-		log.Fatalf("Erro ao realizar o dump do banco de dados '%s' - %s", databaseName, err)
+		log.Fatalf("Erro ao realizar o dump do banco de dados '%s' - %v", databaseName, err)
 	}
 }

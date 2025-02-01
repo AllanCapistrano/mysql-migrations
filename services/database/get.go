@@ -13,7 +13,7 @@ func getAllDatabases() string {
 
 	output, err := command.Output()
 	if err != nil {
-		log.Fatal("Não foi possível obter todos os Banco de Dados")
+		log.Fatalf("Não foi possível obter todos os Banco de Dados - %v", err)
 	}
 
 	return string(output)

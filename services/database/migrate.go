@@ -8,7 +8,7 @@ func ExecuteMigrationsByFile(databaseName string, filepath string) {
 	
 	err := migrateByFileCommand(filepath, databaseName).Run()
 	if err != nil {
-		log.Fatalf("Não foi possível executar a migração do arquivo no banco de dados '%s' - %s", databaseName, err)
+		log.Fatalf("Não foi possível executar a migração do arquivo no banco de dados '%s' - %v", databaseName, err)
 	}
 
 	log.Println("Migração finalizada!")

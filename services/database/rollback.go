@@ -15,7 +15,7 @@ func handleDeleteDatabase(databaseName string) {
 
 	err := command.Run()
 	if err != nil {
-		log.Fatalf("Não foi possível remover o banco de dados %s - %s", databaseName, err)
+		log.Fatalf("Não foi possível remover o banco de dados %s - %v", databaseName, err)
 	}
 }
 
@@ -29,7 +29,7 @@ func handleCreateDatabase(databaseName string) {
 
 	err := command.Run()
 	if err != nil {
-		log.Fatalf("Não foi possível criar o banco de dados %s - %s", databaseName, err)
+		log.Fatalf("Não foi possível criar o banco de dados %s - %v", databaseName, err)
 	}
 }
 
@@ -41,7 +41,7 @@ func handleRestoreDatabase(databaseName string, snapshotFilePath string) {
 
 	err := command.Run()
 	if err != nil {
-		log.Fatalf("Não foi possível restaurar o banco de dados %s - %s", databaseName, err)
+		log.Fatalf("Não foi possível restaurar o banco de dados %s - %v", databaseName, err)
 	}
 }
 
