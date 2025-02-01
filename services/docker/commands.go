@@ -1,4 +1,4 @@
-package database
+package docker
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 )
 
 // Prepara a estrutura para a execução de comandos Data Definition Language (DDL)
-func ddlCommand(query string) *exec.Cmd {
+func DdlCommand(query string) *exec.Cmd {
 	// TODO: Fazer com que algumas partes sejam configuradas, mas também ter um valor default
 	return exec.Command(
 		"docker", "exec", "conexa_mysql", "mysql", "-u", "root",
@@ -15,7 +15,7 @@ func ddlCommand(query string) *exec.Cmd {
 }
 
 // Comando responsável por realizar o dump do banco de dados.
-func dumpCommand(database string) *exec.Cmd {
+func DumpCommand(database string) *exec.Cmd {
 	// TODO: Fazer com que algumas partes sejam configuradas, mas também ter um valor default
 	return exec.Command(
 		"docker", "exec", "conexa_mysql", "mysqldump",
@@ -24,7 +24,7 @@ func dumpCommand(database string) *exec.Cmd {
 }
 
 // Comando responsável por restaurar o dump de um banco de dados.
-func restoreCommand(dump string, database string) *exec.Cmd {
+func RestoreCommand(dump string, database string) *exec.Cmd {
 	// TODO: Fazer com que algumas partes sejam configuradas, mas também ter um valor default
 	command := fmt.Sprintf(
 		"cat %s | docker exec -i conexa_mysql mysql -u root --password=root %s",
@@ -36,7 +36,8 @@ func restoreCommand(dump string, database string) *exec.Cmd {
 }
 
 // Comando responsável por realizar a migração a partir de um arquivo `.sql`.
-func migrateByFileCommand(filepath string, database string) *exec.Cmd {
+func MigrateByFileCommand(filepath string, database string) *exec.Cmd {
+	// TODO: Fazer com que algumas partes sejam configuradas, mas também ter um valor default
 	command := fmt.Sprintf(
 		"docker exec -i conexa_mysql mysql -u root --password=root %s < %s",
 		database,
@@ -47,8 +48,8 @@ func migrateByFileCommand(filepath string, database string) *exec.Cmd {
 }
 
 // Comando responsável por realizar a migração a partir de uma query.
-func migrateCommand(query string, database string) *exec.Cmd {
-	command := ddlCommand(query)
+func MigrateCommand(query string, database string) *exec.Cmd {
+	command := DdlCommand(query)
 
 	command.Args = append(command.Args, database)
 

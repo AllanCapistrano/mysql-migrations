@@ -3,6 +3,8 @@ package database
 import (
 	"fmt"
 	"log"
+
+	"github.com/AllanCapistrano/cnx-migrations/services/docker"
 )
 
 // Lida com a remoção de um banco de dados
@@ -11,7 +13,7 @@ func handleDeleteDatabase(databaseName string) {
 
 	query := fmt.Sprintf("DROP DATABASE %s;", databaseName)
 
-	command := ddlCommand(query)
+	command := docker.DdlCommand(query)
 
 	err := command.Run()
 	if err != nil {
@@ -25,7 +27,7 @@ func handleCreateDatabase(databaseName string) {
 
 	query := fmt.Sprintf("CREATE DATABASE %s;", databaseName)
 
-	command := ddlCommand(query)
+	command := docker.DdlCommand(query)
 
 	err := command.Run()
 	if err != nil {
@@ -37,7 +39,7 @@ func handleCreateDatabase(databaseName string) {
 func handleRestoreDatabase(databaseName string, snapshotFilePath string) {
 	log.Printf("Restaurando o banco de dados '%s'", databaseName)
 
-	command := restoreCommand(snapshotFilePath, databaseName)
+	command := docker.RestoreCommand(snapshotFilePath, databaseName)
 
 	err := command.Run()
 	if err != nil {

@@ -5,6 +5,8 @@ import (
 	"log"
 	"os"
 	"time"
+
+	"github.com/AllanCapistrano/cnx-migrations/services/docker"
 )
 
 // Lida com a criação do nome do arquivo do backup do banco de dados.
@@ -35,7 +37,7 @@ func handleCreateOutputFile(fileName string, path string) (*os.File, error) {
 
 // Realiza o dump de um banco de dados.
 func DumpDatabase(databaseName string, outputPath string) {
-	command := dumpCommand(databaseName)
+	command := docker.DumpCommand(databaseName)
 
 	outputFile, err := handleCreateOutputFile(databaseName, outputPath)
 	if err != nil {
