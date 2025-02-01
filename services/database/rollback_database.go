@@ -1,10 +1,8 @@
-package services
+package database
 
 import (
 	"fmt"
 	"log"
-
-	"github.com/AllanCapistrano/cnx-migrations/services/database"
 )
 
 // Lida com a remoção de um banco de dados
@@ -13,7 +11,7 @@ func handleDeleteDatabase(databaseName string) {
 
 	query := fmt.Sprintf("DROP DATABASE %s;", databaseName)
 
-	command := database.DdlCommand(query)
+	command := ddlCommand(query)
 
 	err := command.Run()
 	if err != nil {
@@ -27,7 +25,7 @@ func handleCreateDatabase(databaseName string) {
 
 	query := fmt.Sprintf("CREATE DATABASE %s;", databaseName)
 
-	command := database.DdlCommand(query)
+	command := ddlCommand(query)
 
 	err := command.Run()
 	if err != nil {
@@ -39,7 +37,7 @@ func handleCreateDatabase(databaseName string) {
 func handleRestoreDatabase(databaseName string, snapshotFilePath string) {
 	log.Printf("Restaurando o banco de dados '%s'", databaseName)
 
-	command := database.RestoreCommand(snapshotFilePath, databaseName)
+	command := restoreCommand(snapshotFilePath, databaseName)
 
 	err := command.Run()
 	if err != nil {

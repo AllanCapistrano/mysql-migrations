@@ -1,12 +1,10 @@
-package services
+package database
 
 import (
 	"fmt"
 	"log"
 	"os"
 	"time"
-
-	"github.com/AllanCapistrano/cnx-migrations/services/database"
 )
 
 // Lida com a criação do nome do arquivo do backup do banco de dados.
@@ -37,7 +35,7 @@ func handleCreateOutputFile(fileName string, path string) (*os.File, error) {
 
 // Realiza o dump de um banco de dados.
 func DumpDatabase(databaseName string, outputPath string) {
-	command := database.DumpCommand(databaseName)
+	command := dumpCommand(databaseName)
 
 	outputFile, err := handleCreateOutputFile(databaseName, outputPath)
 	if err != nil {
