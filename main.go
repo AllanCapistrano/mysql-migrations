@@ -16,5 +16,6 @@ func main() {
 	fmt.Println(databases)
 
 	// database.DumpDatabase("opensev_recorrencia", ".")
-	database.RollbackDatabase("opensev_recorrencia", "./snapshot_opensev_recorrencia_2025-02-01-1738448077080.sql")
+	// database.RollbackDatabase("opensev_recorrencia", "./snapshot_opensev_recorrencia_2025-02-01-1738448077080.sql")
+	database.ExecuteMigrationsByFile("opensev_recorrencia", "./migration_whatsapp.sql")
 }
