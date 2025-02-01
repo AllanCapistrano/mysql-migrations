@@ -37,11 +37,20 @@ func restoreCommand(dump string, database string) *exec.Cmd {
 
 // Comando responsável por realizar a migração a partir de um arquivo `.sql`.
 func migrateByFileCommand(filepath string, database string) *exec.Cmd {
-    command := fmt.Sprintf(
-        "docker exec -i conexa_mysql mysql -u root --password=root %s < %s",
-        database,
-        filepath,
-    )
+	command := fmt.Sprintf(
+		"docker exec -i conexa_mysql mysql -u root --password=root %s < %s",
+		database,
+		filepath,
+	)
 
-    return exec.Command("sh", "-c", command)
+	return exec.Command("sh", "-c", command)
+}
+
+// Comando responsável por realizar a migração a partir de uma query.
+func migrateCommand(query string, database string) *exec.Cmd {
+	command := ddlCommand(query)
+
+	command.Args = append(command.Args, database)
+
+	return command
 }
