@@ -1,8 +1,13 @@
 package services
 
-import "strings"
+import (
+	"strings"
 
-func IsSQLQuery(s string) bool {
+	"github.com/xwb1989/sqlparser"
+)
+
+// Verifica se a string pode ser uma query SQL.
+func CanBeSQLQuery(s string) bool {
 	keywords := []string{
 		"SELECT", "INSERT", "UPDATE", "DELETE", "FROM", "WHERE", "JOIN", "GROUP BY", "ORDER BY", "HAVING",
 		"CREATE", "ALTER", "DROP", "TABLE", "INDEX", "DATABASE", "VIEW", "TRIGGER", "PROCEDURE", "FUNCTION",
@@ -17,4 +22,10 @@ func IsSQLQuery(s string) bool {
 	}
 
 	return false
+}
+
+// Verifica se a string é uma query SQL válida.
+func IsSQLQuery(s string) bool {
+	_, err := sqlparser.Parse(s)
+	return err == nil
 }
