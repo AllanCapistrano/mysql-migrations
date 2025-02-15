@@ -34,25 +34,25 @@ func migrateByFile(args []string) {
 		os.Exit(0)
 	}
 
-	if services.IsValidFile(args[0]) {
-		fmt.Printf("Realizando a migração do arquivo '%s'\n", args[0]) // TODO: Colocar em um loop e informar o banco de dados.
+	if !services.IsValidFile(args[0]) {
+		if services.CanBeSQLQuery(args[0]) {
+			fmt.Println("Parece que você está tentando fazer uma migração a partir de uma query SQL, para isso, utilize o parâmetro '--sql'")
 
-		// TODO: Listar banco de dados.
-		// TODO: Fazer o dump dos bancos de dados para possível rollback
-		// TODO: Realizar a migração via arquivo
+			os.Exit(0)
+		}
 
-		os.Exit(0)
+		fmt.Println("Não foi possível prosseguir com a migração")
+
+		os.Exit(1)
 	}
 
-	if services.CanBeSQLQuery(args[0]) {
-		fmt.Println("Parece que você está tentando fazer uma migração a partir de uma query SQL, para isso, utilize o parâmetro '--sql'")
+	fmt.Printf("Realizando a migração do arquivo '%s'\n", args[0]) // TODO: Colocar em um loop e informar o banco de dados.
 
-		os.Exit(0)
-	}
+	// TODO: Listar banco de dados.
+	// TODO: Fazer o dump dos bancos de dados para possível rollback
+	// TODO: Realizar a migração via arquivo
 
-	fmt.Println("Não foi possível prosseguir com a migração")
-
-	os.Exit(1)
+	os.Exit(0)
 }
 
 func migrateBySql(sql string) {
@@ -62,7 +62,7 @@ func migrateBySql(sql string) {
 		os.Exit(1)
 	}
 
-	fmt.Println("Realizando migração a partir da query SQL")
+	fmt.Println("Realizando migração a partir da query SQL") // TODO: Colocar em um loop e informar o banco de dados.
 
 	// TODO: Listar banco de dados.
 	// TODO: Fazer o dump dos bancos de dados para possível rollback
