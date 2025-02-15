@@ -1,23 +1,23 @@
 package main
 
 import (
-	"fmt"
+	// "fmt"
 
-	"github.com/AllanCapistrano/cnx-migrations/services/database"
+	// "github.com/AllanCapistrano/cnx-migrations/services/database"
+	"github.com/AllanCapistrano/cnx-migrations/cmd"
 )
 
-// "github.com/AllanCapistrano/cnx-migrations/cmd"
 
 func main() {
-	// cmd.Execute()
+	cmd.Execute()
 
-	databases := database.GetDatabases()
+	// databases := database.GetDatabases()
 
-	fmt.Println(databases)
+	// fmt.Println(databases)
 
 	// database.DumpDatabase("opensev_recorrencia", ".")
 	// database.ExecuteMigrationsByFile("opensev_recorrencia", "./migration_whatsapp.sql")
-	database.RollbackDatabase("opensev_recorrencia", "./snapshot_opensev_recorrencia_2025-02-04-1738714924138.sql")
+	// database.RollbackDatabase("opensev_recorrencia", "./snapshot_opensev_recorrencia_2025-02-04-1738714924138.sql")
 
 	// query := `CREATE TABLE whatsapp_mensagens (
 	// 	id INT AUTO_INCREMENT PRIMARY KEY,
