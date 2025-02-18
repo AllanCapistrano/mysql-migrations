@@ -80,7 +80,7 @@ func migrateBySql(sql string, databases []string) {
 }
 
 func init() {
-	Migrate.Flags().StringVarP(&sql, "sql", "S", "", "Query SQL para realizar a migração. Mesmo que seja informado um arquivo, será realizada a migração da query SQL informada.")
+	Migrate.Flags().StringVarP(&sql, "sql", "S", "", "Especifica uma query SQL para realizar a migração. Mesmo que seja informado um arquivo, será realizada a migração da query SQL informada.")
 	Migrate.Flags().StringSliceVarP(&chosenDatabases, "databases", "", []string{}, "Realiza a migração somente nos bancos de dados especificados. Para múltiplos bancos de dados, utilize vírgulas para separá-los. Ex: --databases db1,db2,db3")
 	Migrate.Flags().StringArrayVarP(&chosenDatabases, "database", "D", []string{}, "Realiza a migração somente no banco de dado especificado. Para múltiplos bancos de dados, utilize a flag mais de uma vez. Ex: --database db1 --database db2")
 }
