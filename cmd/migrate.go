@@ -5,10 +5,12 @@ import (
 	"os"
 
 	"github.com/AllanCapistrano/cnx-migrations/services"
+	"github.com/AllanCapistrano/cnx-migrations/services/database"
 	"github.com/spf13/cobra"
 )
 
 var sql string
+var chosenDatabases []string
 
 var Migrate = &cobra.Command{
 	Use:   "migrate",
@@ -20,14 +22,22 @@ var Migrate = &cobra.Command{
 }
 
 func migrate(args []string, sql string) {
-	if sql != "" {
-		migrateBySql(sql)
+	databases := database.GetDatabases()
+
+	if len(chosenDatabases) > 0 {
+		databases = chosenDatabases
 	}
 
-	migrateByFile(args)
+	fmt.Println(databases) // TODO: Remover
+
+	if sql != "" {
+		migrateBySql(sql, databases)
+	}
+
+	migrateByFile(args, databases)
 }
 
-func migrateByFile(args []string) {
+func migrateByFile(args []string, databases []string) {
 	if len(args) == 0 {
 		fmt.Println("É necessário informar o nome do arquivo. Caso queira fazer a migração a partir de uma query SQL, utilize o parâmetro '--sql'")
 
@@ -48,14 +58,13 @@ func migrateByFile(args []string) {
 
 	fmt.Printf("Realizando a migração do arquivo '%s'\n", args[0]) // TODO: Colocar em um loop e informar o banco de dados.
 
-	// TODO: Listar banco de dados.
 	// TODO: Fazer o dump dos bancos de dados para possível rollback
 	// TODO: Realizar a migração via arquivo
 
 	os.Exit(0)
 }
 
-func migrateBySql(sql string) {
+func migrateBySql(sql string, databases []string) {
 	if !services.IsSQLQuery(sql) {
 		fmt.Println("A query informada não é válida, verifique e tente novamente")
 
@@ -64,7 +73,6 @@ func migrateBySql(sql string) {
 
 	fmt.Println("Realizando migração a partir da query SQL") // TODO: Colocar em um loop e informar o banco de dados.
 
-	// TODO: Listar banco de dados.
 	// TODO: Fazer o dump dos bancos de dados para possível rollback
 	// TODO: Realizar a migração via arquivo
 
@@ -72,5 +80,6 @@ func migrateBySql(sql string) {
 }
 
 func init() {
-	Migrate.Flags().StringVarP(&sql, "sql", "S", "", "Query SQL para realizar a migração")
+	Migrate.Flags().StringVarP(&sql, "sql", "S", "", "Query SQL para realizar a migração. Mesmo que seja informado um arquivo, será realizada a migração da query SQL informada.")
+	Migrate.Flags().StringSliceVarP(&chosenDatabases, "databases", "", []string{}, "Realiza a migração somente nos bancos de dados especificados. Para múltiplos bancos de dados, utilize vírgulas para separá-los. Ex: --databases db1,db2,db3")
 }
