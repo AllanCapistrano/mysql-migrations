@@ -20,12 +20,16 @@ Realiza a migração somente no banco de dado especificado.
 
 ```powershell
 cnx migrate my_migration.sql --database database_1
+
+cnx migrate my_migration.sql -D database_1
 ```
 
 Para múltiplos bancos de dados, utilize a flag mais de uma vez.
 
 ```powershell
 cnx migrate my_migration.sql --database database_1 --database database_2
+
+cnx migrate my_migration.sql -D database_1 -D database_2
 ```
 
 ##### --databases
@@ -42,11 +46,18 @@ Especifica uma query SQL para realizar a migração em vez de utilizar um arquiv
 
 ```powershell
 cnx migrate --sql "CREATE TABLE users (id INT)"
+
+cnx migrate -S "CREATE TABLE users (id INT)"
 ```
 
-> [!IMPORTANT]  
-> As flags podem ser combinadas em um só comando, por exemplo
+> [!NOTE]
+> As queries são validadas antes de serem executadas.
 
+> [!TIP]  
+> As flags podem ser combinadas em um só comando
 > ```powershell
 > cnx migrate --sql "CREATE TABLE users (id INT)" --databases database_1,database_2
 > ```
+
+> [!IMPORTANT]
+> Caso sejam utilizadas as flags `--database` e `--databases` no memso comando, somente o(s) banco(s) de dados especificado(s) pela última flag serão considerados.
