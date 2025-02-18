@@ -29,12 +29,12 @@ func GetSettings(fileName string) Settings {
 
 	filePath := filepath.Join(homeDir, ".config", "cnx-migrations", fileName)
 	file, err := os.Open(filePath)
-	if err != nil {
-		log.Printf(
-			"Não foi possível ler o arquivo '%s'! Serão utilizados os valores padrão. \n%v.\n",
-			fileName,
-			err,
-		)
+	if err != nil { // TODO: Colocar para os logs serem salvos em um arquivo
+		// log.Printf(
+		// 	"Não foi possível ler o arquivo '%s'! Serão utilizados os valores padrão. \n%v.\n",
+		// 	fileName,
+		// 	err,
+		// )
 		foundSettingsFile = false
 	}
 
