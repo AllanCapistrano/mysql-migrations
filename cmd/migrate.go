@@ -95,5 +95,6 @@ func init() {
 	Migrate.Flags().StringSliceVarP(&chosenDatabases, "databases", "", []string{}, "Realiza a migração somente nos bancos de dados especificados. Para múltiplos bancos de dados, utilize vírgulas para separá-los. Ex: --databases db1,db2,db3")
 	Migrate.Flags().StringArrayVarP(&chosenDatabases, "database", "D", []string{}, "Realiza a migração somente no banco de dado especificado. Para múltiplos bancos de dados, utilize a flag mais de uma vez. Ex: --database db1 --database db2")
 	Migrate.Flags().StringSliceVarP(&ignoredDatabases, "no-databases", "", []string{}, "Realiza a migração em todos bancos de dados, exceto nos especificados. Para múltiplos bancos de dados, utilize vírgulas para separá-los. Ex: --no-databases db1,db2,db3")
+	Migrate.Flags().StringArrayVarP(&ignoredDatabases, "no-database", "", []string{}, "Realiza a migração em todos bancos de dados, exceto no especificado. Para múltiplos bancos de dados, utilize a flag mais de uma vez. Ex: --no-database db1 --no-database db2")
 	// TODO: Ver se é possível personalizar a mensagem da flag --help
 }
