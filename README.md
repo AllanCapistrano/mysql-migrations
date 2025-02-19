@@ -63,7 +63,7 @@ Para múltiplos bancos de dados, utilize a flag mais de uma vez.
 cnx migrate my_migration.sql --no-database database_1 --no-database database_2
 ```
 
-##### --databases
+##### --no-atabases
 Realiza a migração em todos bancos de dados, exceto nos especificados. Para múltiplos bancos de dados, utilize **vírgulas** para separá-los.
 
 ```powershell
