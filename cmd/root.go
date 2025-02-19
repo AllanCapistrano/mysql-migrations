@@ -29,6 +29,7 @@ func init() {
 	rootCmd.AddCommand(Migrate)
 
 	customHelpCommand()
+	removeCompletionCommand()
 
 	rootCmd.Flags().BoolVarP(&customHelp, "help", "h", false, "Utilize essa flag nos comandos para poder ver todas as suas opções")
 }
@@ -37,4 +38,8 @@ func customHelpCommand() {
 	rootCmd.InitDefaultHelpCmd()
 	helpCmd := rootCmd.Commands()[0] // O comando help é o primeiro comando adicionado
 	helpCmd.Short = "Exibe informações sobre os comandos disponíveis"
+}
+
+func removeCompletionCommand() {
+	rootCmd.Root().CompletionOptions.DisableDefaultCmd = true
 }
