@@ -31,7 +31,7 @@ func init() {
 	customHelpCommand()
 	removeCompletionCommand()
 
-	rootCmd.Flags().BoolVarP(&customHelp, "help", "h", false, "Utilize essa flag nos comandos para poder ver todas as suas opções")
+	rootCmd.Flags().BoolVarP(&customHelp, "help", "h", false, "Utilize essa flag nos comandos para poder ver todas as opções disponíveis")
 }
 
 func customHelpCommand() {
