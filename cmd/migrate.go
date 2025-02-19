@@ -11,6 +11,7 @@ import (
 
 var sql string
 var chosenDatabases []string
+var ignoredDatabases []string
 
 var Migrate = &cobra.Command{
 	Use:   "migrate",
@@ -26,6 +27,16 @@ func migrate(args []string, sql string) {
 
 	if len(chosenDatabases) > 0 {
 		databases = chosenDatabases
+	}
+
+	if len(ignoredDatabases) > 0 {
+		databases = services.SliceDifference(databases, ignoredDatabases)
+	}
+
+	if len(databases) == 0 {
+		fmt.Println("Não existem bancos de dados para realizar a migração")
+
+		os.Exit(0)
 	}
 
 	fmt.Println(databases) // TODO: Remover
@@ -83,6 +94,6 @@ func init() {
 	Migrate.Flags().StringVarP(&sql, "sql", "S", "", "Especifica uma query SQL para realizar a migração. Mesmo que seja informado um arquivo, será realizada a migração da query SQL informada.")
 	Migrate.Flags().StringSliceVarP(&chosenDatabases, "databases", "", []string{}, "Realiza a migração somente nos bancos de dados especificados. Para múltiplos bancos de dados, utilize vírgulas para separá-los. Ex: --databases db1,db2,db3")
 	Migrate.Flags().StringArrayVarP(&chosenDatabases, "database", "D", []string{}, "Realiza a migração somente no banco de dado especificado. Para múltiplos bancos de dados, utilize a flag mais de uma vez. Ex: --database db1 --database db2")
-
-    // TODO: Ver se é possível personalizar a mensagem da flag --help
+	Migrate.Flags().StringSliceVarP(&ignoredDatabases, "no-databases", "", []string{}, "Realiza a migração em todos bancos de dados, exceto nos especificados. Para múltiplos bancos de dados, utilize vírgulas para separá-los. Ex: --no-databases db1,db2,db3")
+	// TODO: Ver se é possível personalizar a mensagem da flag --help
 }
