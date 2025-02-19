@@ -7,6 +7,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var customHelp bool
+
 var rootCmd = &cobra.Command{
 	Use:   "cnx",
 	Short: "TODO",
@@ -25,4 +27,14 @@ func Execute() {
 
 func init() {
 	rootCmd.AddCommand(Migrate)
+
+	customHelpCommand()
+
+	rootCmd.Flags().BoolVarP(&customHelp, "help", "h", false, "Utilize essa flag nos comandos para poder ver todas as suas opções")
+}
+
+func customHelpCommand() {
+	rootCmd.InitDefaultHelpCmd()
+	helpCmd := rootCmd.Commands()[0] // O comando help é o primeiro comando adicionado
+	helpCmd.Short = "Exibe informações sobre os comandos disponíveis"
 }
