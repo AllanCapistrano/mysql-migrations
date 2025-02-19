@@ -50,6 +50,26 @@ cnx migrate --sql "CREATE TABLE users (id INT)"
 cnx migrate -S "CREATE TABLE users (id INT)"
 ```
 
+##### --no-database
+Realiza a migração em todos bancos de dados, exceto no especificado.
+
+```powershell
+cnx migrate my_migration.sql --no-database database_1
+```
+
+Para múltiplos bancos de dados, utilize a flag mais de uma vez.
+
+```powershell
+cnx migrate my_migration.sql --no-database database_1 --no-database database_2
+```
+
+##### --databases
+Realiza a migração em todos bancos de dados, exceto nos especificados. Para múltiplos bancos de dados, utilize **vírgulas** para separá-los.
+
+```powershell
+cnx migrate my_migration.sql --no-databases database_1,database_2
+```
+
 > [!NOTE]
 > As queries são validadas antes de serem executadas.
 
