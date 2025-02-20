@@ -1,6 +1,6 @@
 # CNX Migrations
 
-TODO
+Executa as migrações nos bancos de dados de desenvolvimento da Conexa.
 
 ## Documentação
 
