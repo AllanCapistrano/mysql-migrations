@@ -4,6 +4,11 @@ TODO
 
 ## Documentação
 
+Comandos:
+
+- [Migrate](#migrate)
+- [Rollback](#rollback)
+
 ### Migrate
 
 Realiza uma migração nos bancos de dados a partir de um arquivo `.sql` ou de uma query SQL. Durante o processo, são feitas cópias dos bancos de dados para caso seja necessário realizar o rollback, realizado através do comando 'cnx rollback'.
