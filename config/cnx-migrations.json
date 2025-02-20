@@ -2,6 +2,6 @@
     "containerName": "conexa_mysql",
     "databaseUser": "root",
     "databasePassword": "root",
-    "whiteList": [],
-    "blackList": []
+    "whitelist": [],
+    "blacklist": []
 }

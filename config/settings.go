@@ -11,8 +11,8 @@ type Settings struct {
 	ContainerName    string   `json:"containerName"`
 	DatabaseUser     string   `json:"databaseUser"`
 	DatabasePassword string   `json:"databasePassword"`
-	WhiteList        []string `json:"whiteList"`
-	BlackList        []string `json:"blackList"`
+	Whitelist        []string `json:"whitelist"`
+	Blacklist        []string `json:"blacklist"`
 }
 
 // Obtém as configurações que foram definidas no arquivo de configurações. Caso
@@ -56,8 +56,8 @@ func GetSettings(fileName string) Settings {
 		ContainerName:    "conexa_mysql",
 		DatabaseUser:     "root",
 		DatabasePassword: "root",
-		WhiteList:        []string{},
-		BlackList:        []string{},
+		Whitelist:        []string{},
+		Blacklist:        []string{},
 	}
 }
 
@@ -65,5 +65,5 @@ func GetSettings(fileName string) Settings {
 func GetDatabasesInWhitelist() []string {
 	settings := GetSettings("cnx-migrations.json")
 
-	return settings.WhiteList
+	return settings.Whitelist
 }
