@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/AllanCapistrano/cnx-migrations/config"
 	"github.com/AllanCapistrano/cnx-migrations/services"
 	"github.com/AllanCapistrano/cnx-migrations/services/database"
 	"github.com/spf13/cobra"
@@ -24,6 +25,11 @@ var Migrate = &cobra.Command{
 
 func migrate(args []string, sql string) {
 	databases := database.GetDatabases()
+	databasesInWhitelist := config.GetDatabasesInWhitelist()
+
+	if len(databasesInWhitelist) > 0 {
+		databases = databasesInWhitelist
+	}
 
 	if len(chosenDatabases) > 0 {
 		databases = chosenDatabases
@@ -91,13 +97,13 @@ func migrateBySql(sql string, databases []string) {
 }
 
 func init() {
-    Migrate.SetHelpCommand(&cobra.Command{
+	Migrate.SetHelpCommand(&cobra.Command{
 		Use:    "no-help",
 		Hidden: true,
 	})
 
 	Migrate.Flags().BoolVarP(&customHelp, "help", "h", false, "Exibe as opções do comando 'migrate'")
-    Migrate.Flags().StringVarP(&sql, "sql", "S", "", "Especifica uma query SQL para realizar a migração. Mesmo que seja informado um arquivo, será realizada a migração da query SQL informada.")
+	Migrate.Flags().StringVarP(&sql, "sql", "S", "", "Especifica uma query SQL para realizar a migração. Mesmo que seja informado um arquivo, será realizada a migração da query SQL informada.")
 	Migrate.Flags().StringSliceVarP(&chosenDatabases, "databases", "", []string{}, "Realiza a migração somente nos bancos de dados especificados. Para múltiplos bancos de dados, utilize vírgulas para separá-los.")
 	Migrate.Flags().StringArrayVarP(&chosenDatabases, "database", "D", []string{}, "Realiza a migração somente no banco de dado especificado. Para múltiplos bancos de dados, utilize a flag mais de uma vez.")
 	Migrate.Flags().StringSliceVarP(&ignoredDatabases, "no-databases", "", []string{}, "Realiza a migração em todos bancos de dados, exceto nos especificados. Para múltiplos bancos de dados, utilize vírgulas para separá-los.")
