@@ -27,6 +27,7 @@ func Execute() {
 
 func init() {
 	rootCmd.AddCommand(Migrate)
+	rootCmd.AddCommand(Rollback)
 
 	customHelpCommand()
 	removeCompletionCommand()

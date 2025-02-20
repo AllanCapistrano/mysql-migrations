@@ -81,3 +81,11 @@ cnx migrate my_migration.sql --no-databases database_1,database_2
 > ```powershell
 > cnx migrate --sql "CREATE TABLE users (id INT)" --databases database_1,database_2
 > ```
+
+### Rollback
+
+Realiza o rollback da migração mais recente a partir do último arquivo criado no diretório '.rollback'. Caso nenhum arquivo seja encontrado, o rollback não poderá ser realizado. Ao final do processo o arquivo de rollback é removido.
+
+```powershell
+cnx rollback
+```
