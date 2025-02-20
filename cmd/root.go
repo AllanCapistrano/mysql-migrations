@@ -11,10 +11,12 @@ var customHelp bool
 
 var rootCmd = &cobra.Command{
 	Use:   "cnx",
-	Short: "TODO",
-	Long:  "TODO",
+	Short: "",
+	Long:  "",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Bem vindo ao sistema de migrações do Conexa")
+		fmt.Println("Bem vindo ao sistema de migrações do Conexa.")
+		fmt.Printf("Versão: v1.0.0\n\n")
+		cmd.Help()
 	},
 }
 
