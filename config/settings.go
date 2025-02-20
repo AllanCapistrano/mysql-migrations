@@ -61,9 +61,16 @@ func GetSettings(fileName string) Settings {
 	}
 }
 
-// Retorna os bancos de dados que estão na whitelist
+// Retorna os bancos de dados que estão na whitelist.
 func GetDatabasesInWhitelist() []string {
 	settings := GetSettings("cnx-migrations.json")
 
 	return settings.Whitelist
+}
+
+// Retorna os bancos de dados que estão na blacklist.
+func GetDatabasesInBlacklist() []string {
+	settings := GetSettings("cnx-migrations.json")
+
+	return settings.Blacklist
 }

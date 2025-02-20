@@ -26,6 +26,7 @@ var Migrate = &cobra.Command{
 func migrate(args []string, sql string) {
 	databases := database.GetDatabases()
 	databasesInWhitelist := config.GetDatabasesInWhitelist()
+	databasesInBlacklist := config.GetDatabasesInBlacklist()
 
 	if len(databasesInWhitelist) > 0 {
 		databases = databasesInWhitelist
@@ -33,6 +34,10 @@ func migrate(args []string, sql string) {
 
 	if len(chosenDatabases) > 0 {
 		databases = chosenDatabases
+	}
+
+	if len(databasesInBlacklist) > 0 {
+		databases = services.SliceDifference(databases, databasesInBlacklist)
 	}
 
 	if len(ignoredDatabases) > 0 {
