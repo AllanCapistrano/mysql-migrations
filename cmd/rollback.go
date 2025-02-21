@@ -17,11 +17,11 @@ var Rollback = &cobra.Command{
 	Short: "Realiza o rollback da migração mais recente",
 	Long:  "Realiza o rollback da migração mais recente a partir do último arquivo criado no diretório '.rollback'. Caso nenhum arquivo seja encontrado, o rollback não poderá ser realizado. Ao final do processo o arquivo de rollback é removido",
 	Run: func(cmd *cobra.Command, args []string) {
-		rollback(args)
+		rollback()
 	},
 }
 
-func rollback(args []string) {
+func rollback() {
 	// TODO: Criar método para buscar os arquivos no diretório .rollback que fica em .config/cnx-migrations
 
 	fileName := "nome_do_arquivo_de_rollback"
