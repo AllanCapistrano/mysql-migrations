@@ -10,8 +10,6 @@ import (
 )
 
 var sql string
-var chosenDatabases []string
-var ignoredDatabases []string
 
 var Migrate = &cobra.Command{
 	Use:   "migrate",

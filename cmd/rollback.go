@@ -6,6 +6,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var chosenDatabases []string
+var ignoredDatabases []string
+
 var Rollback = &cobra.Command{
 	Use:   "rollback",
 	Short: "Realiza o rollback da migração mais recente",
