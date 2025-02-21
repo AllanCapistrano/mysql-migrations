@@ -31,11 +31,7 @@ func migrate(args []string, sql string) {
 		databases = services.SliceDifference(databases, ignoredDatabases)
 	}
 
-	if len(databases) == 0 {
-		fmt.Println("Não existem bancos de dados para realizar a migração")
-
-		os.Exit(0)
-	}
+	database.HasRemainingDatabases(databases)
 
 	fmt.Println(databases) // TODO: Remover
 

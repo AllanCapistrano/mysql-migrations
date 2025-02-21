@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/AllanCapistrano/cnx-migrations/services"
 	"github.com/AllanCapistrano/cnx-migrations/services/database"
@@ -26,8 +25,6 @@ func rollback() {
 
 	fileName := "nome_do_arquivo_de_rollback"
 
-	fmt.Printf("Realizando rollback utilizando o arquivo '%s\n", fileName)
-
 	databases := database.GetDatabases()
 
 	if len(chosenDatabases) > 0 {
@@ -38,11 +35,9 @@ func rollback() {
 		databases = services.SliceDifference(databases, ignoredDatabases)
 	}
 
-	if len(databases) == 0 {
-		fmt.Println("Não existem bancos de dados para realizar a migração")
+	database.HasRemainingDatabases(databases)
 
-		os.Exit(0)
-	}
+	fmt.Printf("Realizando rollback utilizando o arquivo '%s\n", fileName)
 
 	fmt.Println(databases) // TODO: Remover
 
