@@ -1,14 +1,43 @@
 package cmd
 
-import "github.com/spf13/cobra"
+import (
+	"fmt"
+	"os"
+
+	"github.com/AllanCapistrano/cnx-migrations/services"
+	"github.com/AllanCapistrano/cnx-migrations/services/database"
+	"github.com/spf13/cobra"
+)
 
 var Dump = &cobra.Command{
 	Use:   "dump",
 	Short: "Realiza o dump dos bancos de dados",
 	Long:  "Realiza o dump de todos os bancos de dados (baseados na whitelist e blacklist, se estiverem preenchidas) organizando-os em diferentes diretórios",
 	Run: func(cmd *cobra.Command, args []string) {
-		
+		dump()
 	},
+}
+
+func dump() {
+	databases := database.GetDatabases()
+
+	if len(chosenDatabases) > 0 {
+		databases = chosenDatabases
+	}
+
+	if len(ignoredDatabases) > 0 {
+		databases = services.SliceDifference(databases, ignoredDatabases)
+	}
+
+	if len(databases) == 0 {
+		fmt.Println("Não existem bancos de dados para realizar a migração")
+
+		os.Exit(0)
+	}
+
+	fmt.Println(databases) // TODO: Remover
+
+	// TODO: Realizar dump dos bancos de dados e exibir uma mensagem para cada banco de dados
 }
 
 func init() {
