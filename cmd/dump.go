@@ -47,4 +47,6 @@ func init() {
 	})
 
 	Dump.Flags().BoolVarP(&customHelp, "help", "h", false, "Exibe as opções do comando 'dump'")
+	Dump.Flags().StringSliceVarP(&chosenDatabases, "databases", "", []string{}, "Realiza o dump somente nos bancos de dados especificados. Para múltiplos bancos de dados, utilize vírgulas para separá-los.")
+	Dump.Flags().StringArrayVarP(&chosenDatabases, "database", "D", []string{}, "Realiza o dump somente no banco de dado especificado. Para múltiplos bancos de dados, utilize a flag mais de uma vez.")
 }
