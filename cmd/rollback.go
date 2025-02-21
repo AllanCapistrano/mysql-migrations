@@ -56,4 +56,6 @@ func init() {
 	})
 
 	Rollback.Flags().BoolVarP(&customHelp, "help", "h", false, "Exibe as opções do comando 'rollback'")
+	Rollback.Flags().StringSliceVarP(&chosenDatabases, "databases", "", []string{}, "Realiza o rollback somente nos bancos de dados especificados. Para múltiplos bancos de dados, utilize vírgulas para separá-los.")
+	Rollback.Flags().StringArrayVarP(&chosenDatabases, "database", "D", []string{}, "Realiza o rollback somente no banco de dado especificado. Para múltiplos bancos de dados, utilize a flag mais de uma vez.")
 }
