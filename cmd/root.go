@@ -27,17 +27,6 @@ func Execute() {
 	}
 }
 
-func init() {
-	rootCmd.AddCommand(Migrate)
-	rootCmd.AddCommand(Rollback)
-    rootCmd.AddCommand(Dump)
-
-	customHelpCommand()
-	removeCompletionCommand()
-
-	rootCmd.Flags().BoolVarP(&customHelp, "help", "h", false, "Utilize essa flag nos comandos para poder ver todas as opções disponíveis")
-}
-
 func customHelpCommand() {
 	rootCmd.InitDefaultHelpCmd()
 	helpCmd := rootCmd.Commands()[1]
@@ -46,4 +35,15 @@ func customHelpCommand() {
 
 func removeCompletionCommand() {
 	rootCmd.Root().CompletionOptions.DisableDefaultCmd = true
+}
+
+func init() {
+	rootCmd.AddCommand(Migrate)
+	rootCmd.AddCommand(Rollback)
+	rootCmd.AddCommand(Dump)
+
+	customHelpCommand()
+	removeCompletionCommand()
+
+	rootCmd.Flags().BoolVarP(&customHelp, "help", "h", false, "Utilize essa flag nos comandos para poder ver todas as opções disponíveis")
 }
