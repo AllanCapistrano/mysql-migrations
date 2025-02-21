@@ -8,6 +8,7 @@ Comandos:
 
 - [Migrate](#migrate)
 - [Rollback](#rollback)
+- [Dump](#dump)
 
 ### Migrate
 
@@ -59,7 +60,7 @@ cnx migrate -S "CREATE TABLE users (id INT)"
 ```
 
 > [!NOTE]
-> As queries são validadas antes de serem executadas.
+> As *queries* são validadas antes de serem executadas.
 
 ##### --no-database
 Realiza a migração em todos bancos de dados, exceto no especificado.
@@ -74,7 +75,7 @@ Para múltiplos bancos de dados, utilize a flag mais de uma vez.
 cnx migrate my_migration.sql --no-database database_1 --no-database database_2
 ```
 
-##### --no-atabases
+##### --no-databases
 Realiza a migração em todos bancos de dados, exceto nos especificados. Para múltiplos bancos de dados, utilize **vírgulas** para separá-los.
 
 ```powershell
@@ -93,4 +94,110 @@ Realiza o rollback da migração mais recente a partir do último arquivo criado
 
 ```powershell
 cnx rollback
+```
+
+##### --database | -D
+
+Realiza o rollback somente no banco de dado especificado.
+
+```powershell
+cnx rollback --database database_1
+
+cnx rollback -D database_1
+```
+
+Para múltiplos bancos de dados, utilize a flag mais de uma vez.
+
+```powershell
+cnx rollback --database database_1 --database database_2
+
+cnx rollback -D database_1 -D database_2
+```
+
+##### --databases
+
+Realiza o rollback somente nos bancos de dados especificados. Para múltiplos bancos de dados, utilize **vírgulas** para separá-los.
+
+```powershell
+cnx rollback --databases database_1,database_2
+```
+
+> [!IMPORTANT]
+> Caso sejam utilizadas as flags `--database` e `--databases` no mesmo comando, somente o(s) banco(s) de dados especificado(s) pela última flag serão considerados.
+
+##### --no-database
+Realiza o rollback em todos bancos de dados, exceto no especificado.
+
+```powershell
+cnx rollback --no-database database_1
+```
+
+Para múltiplos bancos de dados, utilize a flag mais de uma vez.
+
+```powershell
+cnx rollback --no-database database_1 --no-database database_2
+```
+
+##### --no-databases
+Realiza o rollback em todos bancos de dados, exceto nos especificados. Para múltiplos bancos de dados, utilize **vírgulas** para separá-los.
+
+```powershell
+cnx rollback --no-databases database_1,database_2
+```
+
+### Dump
+
+Realiza o dump de todos os bancos de dados (baseados na *whitelist* e *blacklist*, se estiverem preenchidas) organizando-os em diferentes diretórios.
+
+```powershell
+cnx dump
+```
+
+##### --database | -D
+
+Realiza o dump somente do banco de dado especificado.
+
+```powershell
+cnx dump --database database_1
+
+cnx dump -D database_1
+```
+
+Para múltiplos bancos de dados, utilize a flag mais de uma vez.
+
+```powershell
+cnx dump --database database_1 --database database_2
+
+cnx dump -D database_1 -D database_2
+```
+
+##### --databases
+
+Realiza o dump somente dos bancos de dados especificados. Para múltiplos bancos de dados, utilize **vírgulas** para separá-los.
+
+```powershell
+cnx dump --databases database_1,database_2
+```
+
+> [!IMPORTANT]
+> Caso sejam utilizadas as flags `--database` e `--databases` no mesmo comando, somente o(s) banco(s) de dados especificado(s) pela última flag serão considerados.
+
+##### --no-database
+Realiza o dump de todos bancos de dados, exceto no especificado.
+
+```powershell
+cnx dump --no-database database_1
+```
+
+Para múltiplos bancos de dados, utilize a flag mais de uma vez.
+
+```powershell
+cnx dump --no-database database_1 --no-database database_2
+```
+
+##### --no-databases
+Realiza o dump de todos bancos de dados, exceto nos especificados. Para múltiplos bancos de dados, utilize **vírgulas** para separá-los.
+
+```powershell
+cnx dump --no-databases database_1,database_2
 ```
