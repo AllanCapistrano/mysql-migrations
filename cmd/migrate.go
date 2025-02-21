@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/AllanCapistrano/cnx-migrations/config"
 	"github.com/AllanCapistrano/cnx-migrations/services"
 	"github.com/AllanCapistrano/cnx-migrations/services/database"
 	"github.com/spf13/cobra"
@@ -25,19 +24,9 @@ var Migrate = &cobra.Command{
 
 func migrate(args []string, sql string) {
 	databases := database.GetDatabases()
-	databasesInWhitelist := config.GetDatabasesInWhitelist()
-	databasesInBlacklist := config.GetDatabasesInBlacklist()
-
-	if len(databasesInWhitelist) > 0 {
-		databases = databasesInWhitelist
-	}
 
 	if len(chosenDatabases) > 0 {
 		databases = chosenDatabases
-	}
-
-	if len(databasesInBlacklist) > 0 {
-		databases = services.SliceDifference(databases, databasesInBlacklist)
 	}
 
 	if len(ignoredDatabases) > 0 {

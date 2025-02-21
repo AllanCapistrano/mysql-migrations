@@ -4,6 +4,8 @@ import (
 	"log"
 	"strings"
 
+	"github.com/AllanCapistrano/cnx-migrations/config"
+	"github.com/AllanCapistrano/cnx-migrations/services"
 	"github.com/AllanCapistrano/cnx-migrations/services/docker"
 )
 
@@ -34,8 +36,25 @@ func filterByPrefix(array []string, prefix string) []string {
 	return result
 }
 
-// Obtém os bancos de dados `opensev_*`.
+// Obtém os bancos de dados, levando em consideração a whitelist e blacklist.
 func GetDatabases() []string {
+	databases := getAllValidDatabases()
+	databasesInWhitelist := config.GetDatabasesInWhitelist()
+	databasesInBlacklist := config.GetDatabasesInBlacklist()
+
+	if len(databasesInWhitelist) > 0 {
+		databases = databasesInWhitelist
+	}
+
+	if len(databasesInBlacklist) > 0 {
+		databases = services.SliceDifference(databases, databasesInBlacklist)
+	}
+
+	return databases
+}
+
+// Obtém todos os bancos de dados com o prefixo `opensev_*`.
+func getAllValidDatabases() []string {
 	databases := strings.Split(getAllDatabases(), "\n")
 
 	return filterByPrefix(databases, DATABASE_PREFIX)
