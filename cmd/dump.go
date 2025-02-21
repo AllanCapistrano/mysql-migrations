@@ -47,6 +47,8 @@ func init() {
 	})
 
 	Dump.Flags().BoolVarP(&customHelp, "help", "h", false, "Exibe as opções do comando 'dump'")
-	Dump.Flags().StringSliceVarP(&chosenDatabases, "databases", "", []string{}, "Realiza o dump somente nos bancos de dados especificados. Para múltiplos bancos de dados, utilize vírgulas para separá-los.")
-	Dump.Flags().StringArrayVarP(&chosenDatabases, "database", "D", []string{}, "Realiza o dump somente no banco de dado especificado. Para múltiplos bancos de dados, utilize a flag mais de uma vez.")
+	Dump.Flags().StringSliceVarP(&chosenDatabases, "databases", "", []string{}, "Realiza o dump somente dos bancos de dados especificados. Para múltiplos bancos de dados, utilize vírgulas para separá-los.")
+	Dump.Flags().StringArrayVarP(&chosenDatabases, "database", "D", []string{}, "Realiza o dump somente do banco de dado especificado. Para múltiplos bancos de dados, utilize a flag mais de uma vez.")
+	Dump.Flags().StringSliceVarP(&ignoredDatabases, "no-databases", "", []string{}, "Realiza o dump de todos bancos de dados, exceto nos especificados. Para múltiplos bancos de dados, utilize vírgulas para separá-los.")
+	Dump.Flags().StringArrayVarP(&ignoredDatabases, "no-database", "", []string{}, "Realiza o dump de todos bancos de dados, exceto no especificado. Para múltiplos bancos de dados, utilize a flag mais de uma vez.")
 }
