@@ -9,8 +9,6 @@ import (
 	"github.com/AllanCapistrano/mysql-migrations/services/docker"
 )
 
-const DATABASE_PREFIX = "opensev"
-
 // Obtém todos os bancos de dados presentes no container do MySQL.
 func getAllDatabases() string {
 	command := docker.DdlCommand("SHOW DATABASES;")
@@ -53,9 +51,15 @@ func GetDatabases() []string {
 	return databases
 }
 
-// Obtém todos os bancos de dados com o prefixo `opensev_*`.
+// Obtém todos os bancos de dados válidos.
 func getAllValidDatabases() []string {
 	databases := strings.Split(getAllDatabases(), "\n")
 
-	return filterByPrefix(databases, DATABASE_PREFIX)
+	databasesPrefix := config.GetDatabasesPrefix()
+
+	if databasesPrefix != "" {
+		return filterByPrefix(databases, databasesPrefix)
+	}
+
+	return databases
 }
