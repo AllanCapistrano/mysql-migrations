@@ -3,5 +3,6 @@
     "databaseUser": "root",
     "databasePassword": "root",
     "whitelist": [],
-    "blacklist": []
+    "blacklist": [],
+    "databasesPrefix": ""
 }
