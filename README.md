@@ -9,6 +9,7 @@ Comandos:
 - [Migrate](#migrate)
 - [Rollback](#rollback)
 - [Dump](#dump)
+- [Clear](#clear)
 
 ### Migrate
 
@@ -200,4 +201,11 @@ Realiza o dump de todos bancos de dados, exceto nos especificados. Para múltipl
 
 ```powershell
 cnx dump --no-databases database_1,database_2
+```
+### Clear
+
+Remove todos os arquivos de rollback que estão presentes no diretório '.rollback'
+
+```powershell
+cnx clear
 ```
