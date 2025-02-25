@@ -3,10 +3,9 @@ package main
 import (
 	// "fmt"
 
-	// "github.com/AllanCapistrano/cnx-migrations/services/database"
-	"github.com/AllanCapistrano/cnx-migrations/cmd"
+	// "github.com/AllanCapistrano/mysql-migrations/services/database"
+	"github.com/AllanCapistrano/mysql-migrations/cmd"
 )
-
 
 func main() {
 	cmd.Execute()

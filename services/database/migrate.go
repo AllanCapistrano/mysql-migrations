@@ -3,7 +3,7 @@ package database
 import (
 	"log"
 
-	"github.com/AllanCapistrano/cnx-migrations/services/docker"
+	"github.com/AllanCapistrano/mysql-migrations/services/docker"
 )
 
 // Realiza a migração a partir de um arquivo `.sql`

@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"os/exec"
 
-	"github.com/AllanCapistrano/cnx-migrations/config"
+	"github.com/AllanCapistrano/mysql-migrations/config"
 )
 
 var settings config.Settings
 
 func init() {
-	settings = config.GetSettings("cnx-migrations.json")
+	settings = config.GetSettings("mysql-migrations.json")
 }
 
 // Prepara a estrutura para a execução de comandos Data Definition Language (DDL)

@@ -1,5 +1,5 @@
 {
-    "containerName": "conexa_mysql",
+    "containerName": "",
     "databaseUser": "root",
     "databasePassword": "root",
     "whitelist": [],

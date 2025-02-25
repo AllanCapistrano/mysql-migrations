@@ -1,4 +1,4 @@
-module github.com/AllanCapistrano/cnx-migrations
+module github.com/AllanCapistrano/mysql-migrations
 
 go 1.23.5
 

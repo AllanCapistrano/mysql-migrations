@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/AllanCapistrano/cnx-migrations/services"
-	"github.com/AllanCapistrano/cnx-migrations/services/database"
+	"github.com/AllanCapistrano/mysql-migrations/services"
+	"github.com/AllanCapistrano/mysql-migrations/services/database"
 	"github.com/spf13/cobra"
 )
 
@@ -21,7 +21,7 @@ var Rollback = &cobra.Command{
 }
 
 func rollback() {
-	// TODO: Criar método para buscar os arquivos no diretório .rollback que fica em .config/cnx-migrations
+	// TODO: Criar método para buscar os arquivos no diretório .rollback que fica em .config/mysql-migrations
 
 	fileName := "nome_do_arquivo_de_rollback"
 

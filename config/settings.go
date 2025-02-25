@@ -27,7 +27,7 @@ func GetSettings(fileName string) Settings {
 		foundSettingsFile = false
 	}
 
-	filePath := filepath.Join(homeDir, ".config", "cnx-migrations", fileName)
+	filePath := filepath.Join(homeDir, ".config", "mysql-migrations", fileName)
 	file, err := os.Open(filePath)
 	if err != nil { // TODO: Colocar para os logs serem salvos em um arquivo
 		// log.Printf(
@@ -63,14 +63,14 @@ func GetSettings(fileName string) Settings {
 
 // Retorna os bancos de dados que estão na whitelist.
 func GetDatabasesInWhitelist() []string {
-	settings := GetSettings("cnx-migrations.json")
+	settings := GetSettings("mysql-migrations.json")
 
 	return settings.Whitelist
 }
 
 // Retorna os bancos de dados que estão na blacklist.
 func GetDatabasesInBlacklist() []string {
-	settings := GetSettings("cnx-migrations.json")
+	settings := GetSettings("mysql-migrations.json")
 
 	return settings.Blacklist
 }

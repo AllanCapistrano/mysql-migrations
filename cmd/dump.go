@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/AllanCapistrano/cnx-migrations/services"
-	"github.com/AllanCapistrano/cnx-migrations/services/database"
+	"github.com/AllanCapistrano/mysql-migrations/services"
+	"github.com/AllanCapistrano/mysql-migrations/services/database"
 	"github.com/spf13/cobra"
 )
 

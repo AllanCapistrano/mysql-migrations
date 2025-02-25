@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/AllanCapistrano/cnx-migrations/services/docker"
+	"github.com/AllanCapistrano/mysql-migrations/services/docker"
 )
 
 // Lida com a remoção de um banco de dados

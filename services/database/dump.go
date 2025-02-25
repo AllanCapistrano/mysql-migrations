@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/AllanCapistrano/cnx-migrations/services/docker"
+	"github.com/AllanCapistrano/mysql-migrations/services/docker"
 )
 
 // Lida com a criação do nome do arquivo do backup do banco de dados.

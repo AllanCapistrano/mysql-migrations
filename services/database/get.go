@@ -4,9 +4,9 @@ import (
 	"log"
 	"strings"
 
-	"github.com/AllanCapistrano/cnx-migrations/config"
-	"github.com/AllanCapistrano/cnx-migrations/services"
-	"github.com/AllanCapistrano/cnx-migrations/services/docker"
+	"github.com/AllanCapistrano/mysql-migrations/config"
+	"github.com/AllanCapistrano/mysql-migrations/services"
+	"github.com/AllanCapistrano/mysql-migrations/services/docker"
 )
 
 const DATABASE_PREFIX = "opensev"

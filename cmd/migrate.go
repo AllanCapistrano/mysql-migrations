@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/AllanCapistrano/cnx-migrations/services"
-	"github.com/AllanCapistrano/cnx-migrations/services/database"
+	"github.com/AllanCapistrano/mysql-migrations/services"
+	"github.com/AllanCapistrano/mysql-migrations/services/database"
 	"github.com/spf13/cobra"
 )
 
@@ -14,7 +14,7 @@ var sql string
 var Migrate = &cobra.Command{
 	Use:   "migrate",
 	Short: "Realiza uma migração nos bancos de dados",
-	Long:  "Realiza uma migração nos bancos de dados a partir de um arquivo '.sql' ou de uma query SQL. Durante o processo, são feitas cópias dos bancos de dados para caso seja necessário realizar o rollback, realizado através do comando 'cnx rollback'.",
+	Long:  "Realiza uma migração nos bancos de dados a partir de um arquivo '.sql' ou de uma query SQL. Durante o processo, são feitas cópias dos bancos de dados para caso seja necessário realizar o rollback, realizado através do comando 'mm rollback'.",
 	Run: func(cmd *cobra.Command, args []string) {
 		migrate(args, sql)
 	},

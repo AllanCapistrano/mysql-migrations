@@ -10,7 +10,7 @@ import (
 var customHelp bool
 
 var rootCmd = &cobra.Command{
-	Use:   "cnx",
+	Use:   "mm",
 	Short: "",
 	Long:  "",
 	Run: func(cmd *cobra.Command, args []string) {
