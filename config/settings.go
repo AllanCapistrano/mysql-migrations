@@ -13,6 +13,7 @@ type Settings struct {
 	DatabasePassword string   `json:"databasePassword"`
 	Whitelist        []string `json:"whitelist"`
 	Blacklist        []string `json:"blacklist"`
+	DatabasesPrefix  string   `json:"databasesPrefix"`
 }
 
 // Obtém as configurações que foram definidas no arquivo de configurações. Caso
@@ -58,6 +59,7 @@ func GetSettings(fileName string) Settings {
 		DatabasePassword: "root",
 		Whitelist:        []string{},
 		Blacklist:        []string{},
+		DatabasesPrefix:  "",
 	}
 }
 
@@ -73,4 +75,11 @@ func GetDatabasesInBlacklist() []string {
 	settings := GetSettings("mysql-migrations.json")
 
 	return settings.Blacklist
+}
+
+// Retorna o prefixo dos bancos de dados.
+func GetDatabasesPrefix() string {
+	settings := GetSettings("mysql-migrations.json")
+
+	return settings.DatabasesPrefix
 }
