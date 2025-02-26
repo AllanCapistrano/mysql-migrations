@@ -11,7 +11,7 @@ import (
 var Databases = &cobra.Command{
 	Use:   "databases",
 	Short: "Lista os bancos de dados que serão manipulados pelos comandos",
-	Long:  "Lista todos os bancos de dados nos quais os comandos serão executados, leva em consideração os bancos de dados definidos na 'whitelist' e na 'blacklist'.\nOs bancos de dados definidos na 'whitelist' são os de maior precedência, ou seja, caso não esteja vazia, os comandos só serão executados nesses bancos de dados.\nOs bancos de dados definidos na 'blacklist' são filtrados, ou seja, caso não esteja vazia, os comando serão executados em todos os bancos de dados, menos naqueles que estão na 'blacklist'",
+	Long:  "Lista todos os bancos de dados nos quais os comandos serão executados, leva em consideração os bancos de dados definidos na 'whitelist' e na 'blacklist'.\nOs bancos de dados definidos na 'whitelist' são os de maior precedência, ou seja, caso não esteja vazia, os comandos só serão executados nos bancos de dados dessa lista.\nOs bancos de dados definidos na 'blacklist' são filtrados, ou seja, caso não esteja vazia, os comando serão executados em todos os bancos de dados, menos naqueles que estão nessa lista.",
 	Run: func(cmd *cobra.Command, args []string) {
 		databases(args)
 	},
