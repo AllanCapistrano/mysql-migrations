@@ -19,6 +19,12 @@ func init() {
 
 // Obtém o ID do container a partir do nome da imagem Docker.
 func getContainerId(imageName string) string {
+	if imageName == "" {
+		fmt.Println("É necessário informar o nome da imagem Docker, para que o container seja encontrado.")
+
+		os.Exit(1)
+	}
+
 	command := fmt.Sprintf("docker ps --format '{{.ID}} {{.Image}}' | grep '%s' | awk '{print $1}' | head -n 1", imageName)
 
 	output, err := exec.Command("sh", "-c", command).Output()
