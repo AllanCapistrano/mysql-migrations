@@ -8,7 +8,7 @@ import (
 )
 
 type Settings struct {
-	ContainerName    string   `json:"containerName"`
+	DockerImageName  string   `json:"dockerImageName"`
 	DatabaseUser     string   `json:"databaseUser"`
 	DatabasePassword string   `json:"databasePassword"`
 	Whitelist        []string `json:"whitelist"`
@@ -54,7 +54,7 @@ func GetSettings(fileName string) Settings {
 	}
 
 	return Settings{
-		ContainerName:    "conexa_mysql",
+		DockerImageName:  "mysql",
 		DatabaseUser:     "root",
 		DatabasePassword: "root",
 		Whitelist:        []string{},
