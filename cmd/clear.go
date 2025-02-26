@@ -27,5 +27,5 @@ func init() {
 		Hidden: true,
 	})
 
-	Clear.Flags().BoolVarP(&customHelp, "help", "h", false, "Exibe as opções do comando 'clear'")
+	Clear.Flags().BoolVarP(&customHelp, "help", "H", false, "Exibe as opções do comando 'clear'")
 }

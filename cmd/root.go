@@ -46,5 +46,5 @@ func init() {
 	customHelpCommand()
 	removeCompletionCommand()
 
-	rootCmd.Flags().BoolVarP(&customHelp, "help", "h", false, "Utilize essa flag nos comandos para poder ver todas as opções disponíveis")
+	rootCmd.Flags().BoolVarP(&customHelp, "help", "H", false, "Utilize essa flag nos comandos para poder ver todas as opções disponíveis")
 }

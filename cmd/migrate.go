@@ -90,7 +90,7 @@ func init() {
 		Hidden: true,
 	})
 
-	Migrate.Flags().BoolVarP(&customHelp, "help", "h", false, "Exibe as opções do comando 'migrate'")
+	Migrate.Flags().BoolVarP(&customHelp, "help", "H", false, "Exibe as opções do comando 'migrate'")
 	Migrate.Flags().StringVarP(&sql, "sql", "S", "", "Especifica uma query SQL para realizar a migração. Mesmo que seja informado um arquivo, será realizada a migração da query SQL informada.")
 	Migrate.Flags().StringSliceVarP(&chosenDatabases, "databases", "", []string{}, "Realiza a migração somente nos bancos de dados especificados. Para múltiplos bancos de dados, utilize vírgulas para separá-los.")
 	Migrate.Flags().StringArrayVarP(&chosenDatabases, "database", "D", []string{}, "Realiza a migração somente no banco de dado especificado. Para múltiplos bancos de dados, utilize a flag mais de uma vez.")
