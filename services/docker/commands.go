@@ -2,15 +2,41 @@ package docker
 
 import (
 	"fmt"
+	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/AllanCapistrano/mysql-migrations/config"
 )
 
 var settings config.Settings
+var containerId string
 
 func init() {
 	settings = config.GetSettings("mysql-migrations.json")
+	containerId = getContainerId(settings.DockerImageName)
+}
+
+// Obtém o ID do container a partir do nome da imagem Docker.
+func getContainerId(imageName string) string {
+	command := fmt.Sprintf("docker ps --format '{{.ID}} {{.Image}}' | grep '%s' | awk '{print $1}' | head -n 1", imageName)
+
+	output, err := exec.Command("sh", "-c", command).Output()
+	if err != nil {
+		fmt.Println("Erro ao buscar os containers")
+
+		os.Exit(1)
+	}
+
+	containerId := string(output)
+
+	if containerId == "" {
+		fmt.Printf("Não foi encontrado nenhum container da imagem '%s'. Verifique se o nome da imagem está correto ou se o container está executando\n", imageName)
+
+		os.Exit(0)
+	}
+
+	return strings.TrimSpace(containerId)
 }
 
 // Prepara a estrutura para a execução de comandos Data Definition Language (DDL)
@@ -18,7 +44,7 @@ func DdlCommand(query string) *exec.Cmd {
 	passwordParameter := fmt.Sprintf("--password=%s", settings.DatabasePassword)
 
 	return exec.Command(
-		"docker", "exec", settings.ContainerName, "mysql", "-u", settings.DatabaseUser,
+		"docker", "exec", containerId, "mysql", "-u", settings.DatabaseUser,
 		passwordParameter, "-N", "-s", "-e", query,
 	)
 }
@@ -28,7 +54,7 @@ func DumpCommand(database string) *exec.Cmd {
 	passwordParameter := fmt.Sprintf("--password=%s", settings.DatabasePassword)
 
 	return exec.Command(
-		"docker", "exec", settings.ContainerName, "mysqldump",
+		"docker", "exec", containerId, "mysqldump",
 		"-u", settings.DatabaseUser, passwordParameter, database,
 	)
 }
@@ -38,7 +64,7 @@ func RestoreCommand(dump string, database string) *exec.Cmd {
 	command := fmt.Sprintf(
 		"cat %s | docker exec -i %s mysql -u %s --password=%s %s",
 		dump,
-		settings.ContainerName,
+		containerId,
 		settings.DatabaseUser,
 		settings.DatabasePassword,
 		database,
@@ -51,7 +77,7 @@ func RestoreCommand(dump string, database string) *exec.Cmd {
 func MigrateByFileCommand(filepath string, database string) *exec.Cmd {
 	command := fmt.Sprintf(
 		"docker exec -i %s mysql -u %s --password=%s %s < %s",
-		settings.ContainerName,
+		containerId,
 		settings.DatabaseUser,
 		settings.DatabasePassword,
 		database,
