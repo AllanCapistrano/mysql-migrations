@@ -28,7 +28,7 @@ func Execute() {
 
 func customHelpCommand() {
 	rootCmd.InitDefaultHelpCmd()
-	helpCmd := rootCmd.Commands()[2]
+	helpCmd := rootCmd.Commands()[3]
 	helpCmd.Short = "Exibe informações sobre os comandos disponíveis"
 }
 
@@ -41,6 +41,7 @@ func init() {
 	rootCmd.AddCommand(Rollback)
 	rootCmd.AddCommand(Dump)
 	rootCmd.AddCommand(Clear)
+	rootCmd.AddCommand(Databases)
 
 	customHelpCommand()
 	removeCompletionCommand()
