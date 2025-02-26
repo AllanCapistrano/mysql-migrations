@@ -14,8 +14,7 @@ var rootCmd = &cobra.Command{
 	Short: "",
 	Long:  "",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Bem vindo ao sistema de migrações do Conexa.")
-		fmt.Printf("Versão: v1.0.0\n\n")
+		fmt.Printf("MySQL Migrations - Versão v1.0.0\n\n")
 		cmd.Help()
 	},
 }
