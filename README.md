@@ -214,7 +214,9 @@ mm clear
 ### Databases
 
 Lista todos os bancos de dados nos quais os comandos serão executados, leva em consideração os bancos de dados definidos na 'whitelist' e na 'blacklist'.
+
 Os bancos de dados definidos na 'whitelist' são os de maior precedência, ou seja, caso não esteja vazia, os comandos só serão executados nos bancos de dados dessa lista.
+
 Os bancos de dados definidos na 'blacklist' são filtrados, ou seja, caso não esteja vazia, os comando serão executados em todos os bancos de dados, menos naqueles que estão nessa lista.
 
 ```powershell
