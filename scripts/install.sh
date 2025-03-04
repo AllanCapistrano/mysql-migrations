@@ -5,7 +5,7 @@
 
 # Criando os diretórios
 mkdir -p $HOME/.config/mysql-migrations/.rollback
-mkdir -p $HOME/.config/mysql-migrations/logs
+mkdir -p $HOME/.config/mysql-migrations/log
 
 # Movendo os arquivos para os diretórios corretos
 # TODO

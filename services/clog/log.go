@@ -40,7 +40,7 @@ func init() {
 	currentDate := time.Now().Format("2006-01-02")
 	fileName := fmt.Sprintf("%s.log", currentDate)
 
-	filePath = filepath.Join(homeDir, ".config", "mysql-migrations", "logs", fileName)
+	filePath = filepath.Join(homeDir, ".config", "mysql-migrations", "log", fileName)
 }
 
 // Escreve as mensagens de log em um arquivo customizado.
