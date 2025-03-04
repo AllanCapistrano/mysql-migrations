@@ -10,6 +10,27 @@ import (
 
 var filePath string
 
+type LogLevel int
+
+const (
+	INFO LogLevel = iota
+	WARNING
+	ERROR
+)
+
+func (logLevel LogLevel) String() string {
+	switch logLevel {
+	case INFO:
+		return "INFO"
+	case WARNING:
+		return "WARNING"
+	case ERROR:
+		return "ERROR"
+	default:
+		return "UNKNOWN"
+	}
+}
+
 func init() {
 	homeDir, err := os.UserHomeDir()
 	if err != nil {
@@ -23,7 +44,7 @@ func init() {
 }
 
 // Escreve as mensagens de log em um arquivo customizado.
-func Print(message string) {
+func Print(message string, level LogLevel) {
 	logFile, err := os.OpenFile(filePath, os.O_APPEND|os.O_RDWR|os.O_CREATE, 0644)
 	if err != nil {
 		log.Panic(err)
@@ -32,12 +53,12 @@ func Print(message string) {
 	defer logFile.Close()
 
 	log.SetOutput(logFile)
-	log.SetFlags(log.Ldate | log.Ltime)
-	log.Println(message)
+	log.SetFlags(log.Ltime)
+	log.Printf("[%s] %s\n", level, message)
 }
 
 // Escreve as mensagens de log em um arquivo customizado e para a execução do programa.
-func Fatal(message string) {
-	Print(message)
+func Fatal(message string, level LogLevel) {
+	Print(message, level)
 	os.Exit(1)
 }
