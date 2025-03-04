@@ -1,11 +1,12 @@
 package database
 
 import (
-	"log"
+	"fmt"
 	"strings"
 
 	"github.com/AllanCapistrano/mysql-migrations/config"
 	"github.com/AllanCapistrano/mysql-migrations/services"
+	"github.com/AllanCapistrano/mysql-migrations/services/clog"
 	"github.com/AllanCapistrano/mysql-migrations/services/docker"
 )
 
@@ -15,7 +16,8 @@ func getAllDatabases() string {
 
 	output, err := command.Output()
 	if err != nil {
-		log.Fatalf("Não foi possível obter todos os Banco de Dados - %v", err)
+		message := fmt.Sprintf("Não foi possível obter todos os Banco de Dados - %v", err)
+		clog.Fatal(message, clog.ERROR)
 	}
 
 	return string(output)

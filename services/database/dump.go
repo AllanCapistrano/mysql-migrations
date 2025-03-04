@@ -2,10 +2,10 @@ package database
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"time"
 
+	"github.com/AllanCapistrano/mysql-migrations/services/clog"
 	"github.com/AllanCapistrano/mysql-migrations/services/docker"
 )
 
@@ -41,7 +41,7 @@ func DumpDatabase(databaseName string, outputPath string) {
 
 	outputFile, err := handleCreateOutputFile(databaseName, outputPath)
 	if err != nil {
-		log.Fatal(err)
+		clog.Fatal(err.Error(), clog.ERROR)
 	}
 
 	defer outputFile.Close()
@@ -50,6 +50,7 @@ func DumpDatabase(databaseName string, outputPath string) {
 
 	err = command.Run()
 	if err != nil {
-		log.Fatalf("Erro ao realizar o dump do banco de dados '%s' - %v", databaseName, err)
+		message := fmt.Sprintf("Erro ao realizar o dump do banco de dados '%s' - %v", databaseName, err)
+		clog.Fatal(message, clog.ERROR)
 	}
 }

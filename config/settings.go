@@ -2,9 +2,11 @@ package config
 
 import (
 	"encoding/json"
-	"log"
+	"fmt"
 	"os"
 	"path/filepath"
+
+	"github.com/AllanCapistrano/mysql-migrations/services/clog"
 )
 
 type Settings struct {
@@ -23,7 +25,7 @@ func GetSettings(fileName string) Settings {
 
 	homeDir, err := os.UserHomeDir()
 	if err != nil {
-		log.Println("Não foi possível acessar o diretório home do usuário.", err)
+		fmt.Println("Não foi possível acessar o diretório home do usuário.", err)
 
 		foundSettingsFile = false
 	}
@@ -31,11 +33,13 @@ func GetSettings(fileName string) Settings {
 	filePath := filepath.Join(homeDir, ".config", "mysql-migrations", fileName)
 	file, err := os.Open(filePath)
 	if err != nil { // TODO: Colocar para os logs serem salvos em um arquivo
-		// log.Printf(
-		// 	"Não foi possível ler o arquivo '%s'! Serão utilizados os valores padrão. \n%v.\n",
-		// 	fileName,
-		// 	err,
-		// )
+		message := fmt.Sprintf(
+			"Não foi possível ler o arquivo '%s'! Serão utilizados os valores padrão.",
+			fileName,
+		)
+
+		clog.Print(message, clog.WARNING)
+
 		foundSettingsFile = false
 	}
 
@@ -47,7 +51,9 @@ func GetSettings(fileName string) Settings {
 		decoder := json.NewDecoder(file)
 		err := decoder.Decode(&settings)
 		if err != nil {
-			log.Println("Erro ao decodificar o JSON:", err)
+			message := fmt.Sprintf("Erro ao decodificar o JSON: %v", err)
+
+			clog.Print(message, clog.ERROR)
 		}
 
 		return settings
